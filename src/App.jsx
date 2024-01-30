@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react'
 import './App.css'
 import { fetchDataFromApi } from './utils/api'
 import { useSelector, useDispatch } from 'react-redux'
-import {getApiConfigration} from "./store/homeSlice"
+import {getApiConfigration,getGenres} from "./store/homeSlice"
 
 import Home from './pages/home/Home';
 import PageNotFound from './pages/404/PageNotFound';
@@ -33,7 +33,24 @@ function App() {
 
   useEffect(()=>{
     fetchApiConfig();
-  },[])
+    genresCall();
+  },[]);
+
+  const genresCall = async ()=>{
+    let promises = [];
+    let endPoints = ["tv","movie"];
+    let allGenres = {};
+
+    endPoints.forEach((url)=>{
+      promises.push(fetchDataFromApi(`/genre/${url}/list`));
+    });
+
+    const data = await Promise.all(promises);
+    data.map(({genres})=>{
+      return genres.map((item)=>(allGenres[item.id]=item));
+    });
+    dispatch(getGenres(allGenres));
+  }
 
   return (
     <>
@@ -46,7 +63,7 @@ function App() {
         <Route path="explore/:mediaType" element={<Explore />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
     </>
   )
