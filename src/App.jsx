@@ -6,7 +6,7 @@ import {getApiConfigration,getGenres} from "./store/homeSlice"
 
 import Home from './pages/home/Home';
 import PageNotFound from './pages/404/PageNotFound';
-import Detail from "./pages/details/Detail";
+import Detail from "./pages/details/Details";
 import Explore from "./pages/explore/Explore";
 import SearchResult from "./pages/searchResult/SearchResult";
 import Header from "./components/header/Header";
