@@ -5,7 +5,7 @@ import "./VideosSection.scss";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import VideoPopup from "../../../components/videoPopup/VideoPopup";
 import Img from "../../../components/lazyLoadImage/Img";
-import { PlayIcon } from "../PlayBtn";
+import { PlayIcon } from "../Playbtn";
 
 const VideosSection = ({ data, loading }) => {
   const [show, setShow] = useState(false);
@@ -42,9 +42,7 @@ const VideosSection = ({ data, loading }) => {
                   />
                   <PlayIcon />
                 </div>
-                <div className="videoTitle">
-                    {video.name}
-                </div>
+                <div className="videoTitle">{video.name}</div>
               </div>
             ))}
           </div>
